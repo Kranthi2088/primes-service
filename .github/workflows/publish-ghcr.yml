@@ -29,7 +29,7 @@ jobs:
 #            path: target/surefire-reports/*.xml
 #            reporter: java-junit
 #            fail-on-error: true
-
+# 2
       - name: Build and push the image
         run: |
           docker login --username kranthi2088 --password-stdin ${{secrets.ACCESS_TOKEN1 }} ghcr.io
