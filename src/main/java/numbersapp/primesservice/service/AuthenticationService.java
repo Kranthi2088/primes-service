@@ -10,31 +10,24 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
 @Service
 public class AuthenticationService implements IAuthenticationService, UserDetailsService {
 
-    AuthenticationDBRepository authenticationRepository;
-
-    public AuthenticationService(
-            AuthenticationDBRepository authenticationRepository) {
-        this.authenticationRepository=authenticationRepository;
-    }
-
     IAuthenticationRepository iAuthenticationRepository;
+    AuthenticationDBRepository authenticationDBRepository;
 
-    public AuthenticationService(IAuthenticationRepository iAuthenticationRepository) {
-        this.iAuthenticationRepository = iAuthenticationRepository;
+    public AuthenticationService(AuthenticationDBRepository authenticationDBRepository) {
+        this.authenticationDBRepository = authenticationDBRepository;
     }
 
     @Override
-    public boolean register(Customer customer) throws IOException {
+    public Customer register(Customer customer) throws IOException {
         System.out.println(customer);
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
         String passwordEncoded = bc.encode(customer.getPassword());
         customer.setPassword(passwordEncoded);
-        return iAuthenticationRepository.save(customer);
+        return authenticationDBRepository.save(customer);
     }
 
     @Override

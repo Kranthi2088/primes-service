@@ -1,14 +1,12 @@
 package numbersapp.primesservice.controller;
 
 import numbersapp.primesservice.model.Customer;
-import numbersapp.primesservice.service.AuthenticationService;
 import numbersapp.primesservice.service.IAuthenticationService;
 import numbersapp.primesservice.service.TokenService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.token.TokenService;
-import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +32,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public boolean register(@RequestBody Customer customer) {
+    public Customer register(@RequestBody Customer customer) {
         try {
             return iAuthenticationService.register(customer);
         } catch (IOException e) {

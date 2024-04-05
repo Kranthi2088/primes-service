@@ -6,12 +6,15 @@ spring:
 
   jpa:
     hibernate:
+
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-sql:
-  init:
-    mode: always
+
+
+  sql:
+    init:
+      mode: always
 
 server:
   port: 8085
