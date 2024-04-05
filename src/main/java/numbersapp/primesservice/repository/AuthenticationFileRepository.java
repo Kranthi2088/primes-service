@@ -48,6 +48,11 @@ public class AuthenticationFileRepository implements IAuthenticationRepository{
     }
 
     @Override
+    public Customer register(Customer customer) throws IOException {
+        return null;
+    }
+
+    @Override
     public boolean save(Customer customer) throws IOException{
         System.out.println(customer);
         Customer x = findByUsername(customer.getUsername());

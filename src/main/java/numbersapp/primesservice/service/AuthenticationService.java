@@ -1,5 +1,6 @@
 package numbersapp.primesservice.service;
 import numbersapp.primesservice.model.Customer;
+import numbersapp.primesservice.repository.AuthenticationDBRepository;
 import numbersapp.primesservice.repository.IAuthenticationRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,13 @@ import java.io.OutputStream;
 
 @Service
 public class AuthenticationService implements IAuthenticationService, UserDetailsService {
+
+    AuthenticationDBRepository authenticationRepository;
+
+    public AuthenticationService(
+            AuthenticationDBRepository authenticationRepository) {
+        this.authenticationRepository=authenticationRepository;
+    }
 
     IAuthenticationRepository iAuthenticationRepository;
 
@@ -46,7 +54,7 @@ public class AuthenticationService implements IAuthenticationService, UserDetail
                     .password(customer.getPassword())
                     .build();
         }
-        catch (IOException e){
+        catch (Exception e){
             throw new RuntimeException(e);
         }
 
